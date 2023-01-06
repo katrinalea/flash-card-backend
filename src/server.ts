@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
 // GET /items
 app.get("/names", async (req, res) => {
   const text =
-    "select name, correct, testamount, correct/testamount * 100 as percentage from leaderboard order by percentage desc limit 10";
+    "select name, correct, testamount, (correct::FLOAT)/testamount * 100 as percentage from leaderboard order by percentage desc limit 10";
   const dbResponse = await client.query(text);
   res.status(200).json({
     status: "success",
